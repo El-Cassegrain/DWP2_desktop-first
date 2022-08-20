@@ -83,12 +83,24 @@ svg#logo {
     align-items: center;
     padding: 25px 25px;
     font-weight: 500;
+    position: relative; /* Parent positioned */
 }
 
 #main-nav a.active {
-    border-top: 3px solid var(--primary-color);
+    /* border-top: 3px solid var(--primary-color); */
     color: var(--primary-color);
     font-weight: 600;
+}
+
+/* Pseudo element that can be animated on hover (see bonus section in the bottom of this page) */
+#main-nav a.active::after {
+    content: "";
+    position: absolute; /* refers to the last parent positioned, in this case the main a elements */
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background-color: var(--primary-color);
 }
 
 /*====== Top section ======*/
@@ -553,4 +565,62 @@ a#show-more-link {
     .footer-row .col {
         padding-top: 42px;
     }
+}
+
+/*====== Bonus ======*/
+
+/* Logo animation */
+.logo-container:hover svg #B, .logo-container:focus svg #B{
+    animation: bounce 1s 0.012s ease-in-out;
+}
+.logo-container:hover svg #first-o, .logo-container:focus svg #first-o{
+    animation: bounce 1s 0.1s ease-in-out;
+}
+.logo-container:hover svg #second-o, .logo-container:focus svg #second-o{
+    animation: bounce 1s 0.2s ease-in-out;
+}
+.logo-container:hover svg #K, .logo-container:focus svg #K{
+    animation: bounce 0.85s 0.38s ease-in-out;
+}
+.logo-container:hover svg #i-path, .logo-container:focus svg #i-path{
+    animation: bounce 1s 0.4s ease-in-out;
+}
+.logo-container:hover svg #point-on-i, .logo-container:focus svg #point-on-i{
+    animation: bounce 0.9s 0.46s ease-in-out;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(12px)
+    }
+    15% {
+        transform: translateY(-6px)
+    }
+    20% {
+        transform: translateY(6px)
+    }
+    100% {
+        transform: translateY(0)
+    }
+}
+
+/* Main nav hover animation on desktop */
+#main-nav a:not(.active):hover, #main-nav a:not(.active):focus {
+    color: var(--primary-color);
+    transition: color 0.35s 0.012s ease-in;
+}
+
+#main-nav a:not(.active)::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #fff;
+}
+#main-nav a:not(.active):hover::after, #main-nav a:not(.active):focus::after {
+    width: 100%;
+    background-color: var(--primary-color);
+    transition: all ease-in-out 0.25s 0.012s;
 }
