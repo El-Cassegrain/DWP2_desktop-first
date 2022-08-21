@@ -21,9 +21,12 @@
     --light-primary-color: #e6f0ff;
     --light-grey: #F2F2F2;
     --body-color: #000;
+    --primary-color-hover: #0e58c9; 
+    
     --section-margin-top: 32px;
     --main-border-radius: 14px;
-    --main-box-shadow: 3px 3px 10px rgba(2, 2, 2, 0.085)
+    --main-box-shadow: 3px 3px 10px rgba(2, 2, 2, 0.085);
+    --main-transition: all ease-in 0.18s;
 }
 
 /* Global styles */
@@ -59,6 +62,44 @@ body a {
     box-shadow: var(--main-box-shadow);
 }
 
+.box-shadow:hover, .box-shadow:focus {
+    box-shadow: 3px 6px 14px rgba(2, 2, 2, 0.19);
+    filter: brightness(1.1);
+    transition: var(--main-transition)
+}
+
+.sticky {
+    position: sticky;
+    background-color: #fff;
+    z-index: 99;
+    border-bottom: 1px solid var(--light-grey);
+    box-shadow: 2px 2px 3px rgba(2, 2, 2, 0.1);
+    top: 0;
+}
+
+#scrollTopBtn {
+    position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    bottom: 25px;
+    right: 25px;
+    z-index: 99;
+    outline: none;
+    font-size: 1.125rem;
+    background-color: var(--light-grey);
+    border: 1px solid rgb(102, 102, 102);
+    cursor: pointer;
+    padding: 10px 12px;
+    border-radius: 4px;
+    transition: all ease-in 0.35s 0.012s;
+  }
+
+  #scrollTopBtn.active {
+    opacity: 1;
+    visibility: visible;
+    transition: all ease-out 1s 0.012s;
+  }
+
 /*====== Header ======*/
 
 #main-header {
@@ -69,7 +110,7 @@ body a {
 
 /* Logo */
 .logo-container {
-    padding: 12px 0;
+    /*padding: 12px 0;*/
 }
 
 svg#logo {
@@ -81,7 +122,7 @@ svg#logo {
 #main-nav a {
     display: inline-flex;
     align-items: center;
-    padding: 25px 25px;
+    padding: 20px 25px;
     font-weight: 500;
     position: relative; /* Parent positioned */
 }
@@ -139,7 +180,7 @@ h1 span {
 }
 
 input {
-    width: 100%;
+    width: 93.89%;
     border: 1px solid var(--light-grey);
     margin-left: 32px;
     padding-left: 20px;
@@ -153,6 +194,13 @@ button#search-btn {
     font-size: 18px;
     border-top-right-radius: var(--main-border-radius);
     border-bottom-right-radius: var(--main-border-radius);
+    cursor: pointer;
+}
+
+#search-btn:hover {
+    background-color: var(--primary-color-hover);
+    color: white;
+    transition: var(--main-transition);
 }
 
 #search-btn i {
@@ -571,22 +619,22 @@ a#show-more-link {
 
 /* Logo animation */
 .logo-container:hover svg #B, .logo-container:focus svg #B{
-    animation: bounce 1s 0.012s ease-in-out;
+    animation: bounce 0.75s 0.012s ease-in-out;
 }
 .logo-container:hover svg #first-o, .logo-container:focus svg #first-o{
-    animation: bounce 1s 0.1s ease-in-out;
+    animation: bounce 0.65s 0.1s ease-in-out;
 }
 .logo-container:hover svg #second-o, .logo-container:focus svg #second-o{
-    animation: bounce 1s 0.2s ease-in-out;
+    animation: bounce 0.60s 0.2s ease-in-out;
 }
 .logo-container:hover svg #K, .logo-container:focus svg #K{
-    animation: bounce 0.85s 0.38s ease-in-out;
+    animation: bounce 0.65s 0.38s ease-in-out;
 }
 .logo-container:hover svg #i-path, .logo-container:focus svg #i-path{
-    animation: bounce 1s 0.4s ease-in-out;
+    animation: bounce 0.55s 0.4s ease-in-out;
 }
 .logo-container:hover svg #point-on-i, .logo-container:focus svg #point-on-i{
-    animation: bounce 0.9s 0.46s ease-in-out;
+    animation: bounce 0.42s 0.36s ease-in-out;
 }
 
 @keyframes bounce {
@@ -596,7 +644,7 @@ a#show-more-link {
     15% {
         transform: translateY(-6px)
     }
-    20% {
+    80% {
         transform: translateY(6px)
     }
     100% {
@@ -611,16 +659,21 @@ a#show-more-link {
 }
 
 #main-nav a:not(.active)::after{
+    --pseudo-width: 0;
     content: "";
     position: absolute;
     top: 0;
     left: 0;
-    width: 0;
+    width: var(--pseudo-width);
     height: 3px;
     background-color: #fff;
 }
 #main-nav a:not(.active):hover::after, #main-nav a:not(.active):focus::after {
     width: 100%;
     background-color: var(--primary-color);
-    transition: all ease-in-out 0.25s 0.012s;
+    transition: all ease-out 0.25s 0.012s;
+}
+
+#main-nav a.active {
+
 }
